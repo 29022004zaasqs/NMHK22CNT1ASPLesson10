@@ -1,0 +1,33 @@
+﻿@model IEnumerable<NMHLesson10.Models.Khoa>
+
+@{
+    ViewBag.Title = "NmhIndex";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "NmhCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenKH)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenKH)
+        </td>
+        <td>
+            @Html.ActionLink("NNM:Edit", "NmhEdit", new { id=item.MaKH.Trim() }) |
+            @Html.ActionLink("NMH:Details", "NmhDetails", new { id=item.MaKH.Trim() }) |
+            @Html.ActionLink("NMH:Delete", "NmhDelete", new { id=item.MaKH.Trim() })
+        </td>
+    </tr>
+}
+
+</table>

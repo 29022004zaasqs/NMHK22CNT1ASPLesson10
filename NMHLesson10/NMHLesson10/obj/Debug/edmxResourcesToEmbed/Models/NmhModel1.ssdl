@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NmhK22CNT1Lesson10Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="KetQua">
+    <Key>
+      <PropertyRef Name="MaSV" />
+      <PropertyRef Name="MaMH" />
+    </Key>
+    <Property Name="MaSV" Type="int" Nullable="false" />
+    <Property Name="MaMH" Type="int" Nullable="false" />
+    <Property Name="Diem" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Khoa">
+    <Key>
+      <PropertyRef Name="MaKH" />
+    </Key>
+    <Property Name="MaKH" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="TenKH" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MonHoc">
+    <Key>
+      <PropertyRef Name="MaMH" />
+    </Key>
+    <Property Name="MaMH" Type="int" Nullable="false" />
+    <Property Name="TenMH" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SoTiet" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SinhVien">
+    <Key>
+      <PropertyRef Name="MaSV" />
+    </Key>
+    <Property Name="MaSV" Type="int" Nullable="false" />
+    <Property Name="HoSV" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TenSV" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phai" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="NgaySinh" Type="date" Nullable="false" />
+    <Property Name="NoiSinh" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MaKH" Type="nvarchar" MaxLength="10" />
+    <Property Name="HocBong" Type="float" />
+    <Property Name="DiemTrungBinh" Type="float" />
+  </EntityType>
+  <Association Name="FK__KetQua__MaMH__182C9B23">
+    <End Role="MonHoc" Type="Self.MonHoc" Multiplicity="1" />
+    <End Role="KetQua" Type="Self.KetQua" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MonHoc">
+        <PropertyRef Name="MaMH" />
+      </Principal>
+      <Dependent Role="KetQua">
+        <PropertyRef Name="MaMH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KetQua__MaSV__173876EA">
+    <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
+    <End Role="KetQua" Type="Self.KetQua" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SinhVien">
+        <PropertyRef Name="MaSV" />
+      </Principal>
+      <Dependent Role="KetQua">
+        <PropertyRef Name="MaSV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SinhVien__MaKH__1273C1CD">
+    <End Role="Khoa" Type="Self.Khoa" Multiplicity="0..1" />
+    <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Khoa">
+        <PropertyRef Name="MaKH" />
+      </Principal>
+      <Dependent Role="SinhVien">
+        <PropertyRef Name="MaKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NmhK22CNT1Lesson10ModelStoreContainer">
+    <EntitySet Name="KetQua" EntityType="Self.KetQua" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Khoa" EntityType="Self.Khoa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MonHoc" EntityType="Self.MonHoc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SinhVien" EntityType="Self.SinhVien" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__KetQua__MaMH__182C9B23" Association="Self.FK__KetQua__MaMH__182C9B23">
+      <End Role="MonHoc" EntitySet="MonHoc" />
+      <End Role="KetQua" EntitySet="KetQua" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KetQua__MaSV__173876EA" Association="Self.FK__KetQua__MaSV__173876EA">
+      <End Role="SinhVien" EntitySet="SinhVien" />
+      <End Role="KetQua" EntitySet="KetQua" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SinhVien__MaKH__1273C1CD" Association="Self.FK__SinhVien__MaKH__1273C1CD">
+      <End Role="Khoa" EntitySet="Khoa" />
+      <End Role="SinhVien" EntitySet="SinhVien" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
